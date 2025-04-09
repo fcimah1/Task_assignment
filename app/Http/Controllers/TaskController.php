@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DTO\TaskDTO;
 use App\Http\Requests\TaskRequest;
+use App\Models\Task;
 use App\Repository\Interface\ITaskRepository;
 use Illuminate\Http\Request;
 
@@ -18,9 +19,9 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = $this->taskRepository->getAllTasks();
+        $tasks = $this->taskRepository->getTasks($request);
         return response()->json([
             'status' => true,
             'tasks' => $tasks,
@@ -90,4 +91,15 @@ class TaskController extends Controller
             'message' => 'task delete successfully'
         ]);
     }
+
+
+    // Restore a soft-deleted task.
+    public function restore(string $id)
+    {
+        $this->taskRepository->restoreTask($id);
+        return response()->json([
+            'status' => true,
+            'message' => 'task restore successfully'
+            ]);
+        }
 }

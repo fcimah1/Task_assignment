@@ -27,6 +27,20 @@ class TaskRequest extends FormRequest
             'title' => 'required|string',
             'status' => ['required', new Enum(Status::class)],
             'user_id' =>'required|exists:users,id',
+            'description' => 'string',
+            'category_id' => 'required|exists:categories,id'
         ];
+    }
+
+    public function messages()
+    {
+        return [
+            'title.required' => 'Title is required',
+            'status.required' => 'Status is required',
+            'user_id.required' => 'User is required',
+            'category_id.required' => 'Category is required',
+            'user_id.exists' => 'User does not exist',
+            'category_id.exists' => 'Category does not exist',
+            ];
     }
 }

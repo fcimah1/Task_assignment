@@ -34,7 +34,7 @@ class CreateDTO extends Command
         $content = 
         <<<php
         <?php
-        namespace App\DTO;'
+        namespace App\DTO;
         use Spatie\LaravelData\Data;
         Class $name extends Data
         {
