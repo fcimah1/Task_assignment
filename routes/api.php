@@ -22,3 +22,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/categories/update/{category_id}', [CategoryController::class, 'update']); // update category
     Route::delete('/categories/delete/{category_id}', [CategoryController::class, 'destroy']); // delete category
 });
+
+// Chunked upload test endpoints (no CSRF, useful for local testing)
+use App\Http\Controllers\ChunkedUploadController;
+Route::post('/import/chunk-upload', [ChunkedUploadController::class, 'uploadChunk']);
+Route::post('/import/finalize-upload', [ChunkedUploadController::class, 'finalizeUpload']);
